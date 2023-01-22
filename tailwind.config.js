@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-env node */
+
+const colors = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -6,7 +11,11 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        rose: colors.rose,
+      },
+    },
   },
-  plugins: [],
-}
+  plugins: [require('@tailwindcss/forms')],
+};
