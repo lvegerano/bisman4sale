@@ -1,0 +1,65 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+# FOR TESTING ONLY!
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
+
+type Category @model(subscriptions: null) {
+  id: ID! @primaryKey
+  parentID: ID @index(name: "byParent", queryField: "listByParent", sortKeyFields: "name")
+  name: String!
+  parent: Category @hasOne(fields: ["parentID"])
+  subCategories: [Category] @hasMany(indexName: "byParent", fields: ["id"])
+}
+
+type User @model(subscriptions: null) {
+  name: String
+  email: String!
+  ads: [Ad] @hasMany
+  watchList: WatchList @hasOne
+}
+
+type WatchList @model(subscriptions: null) {
+  id: ID!
+  userID: ID!
+  ads: [Ad] @manyToMany(relationName: "AdWatchLists")
+  user: User @belongsTo(fields: ["userID"])
+}
+
+type Conversation @model {
+  id: ID!
+  name: String!
+  adID: ID!
+  Ad: Ad @hasOne(fields: ["adID"])
+  messages: [Message] @hasMany(indexName: "byConversation", fields: ["id"])
+}
+
+type Message @model {
+  id: ID!
+  message: String!
+  conversationID: ID! @index(name: "byConversation", sortKeyFields: ["createdAt"])
+  fromUserID: ID!
+  toUserID: ID!
+  adID: ID!
+  from: User @hasOne(fields: ["fromUserID"])
+  to: User @hasOne(fields: ["toUserID"])
+  createdAt: AWSDateTime!
+}
+
+type Ad @model(subscriptions: null) {
+  user: User @belongsTo
+  name: String!
+  description: String
+  condition: String
+  price: String
+  status: String
+  category: String!
+  images: [Image] @hasMany
+  watchLists: [WatchList] @manyToMany(relationName: "AdWatchLists")
+}
+
+type Image @model(subscriptions: null) {
+  description: String!
+  Ad: Ad @belongsTo
+}
