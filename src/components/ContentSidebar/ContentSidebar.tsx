@@ -12,7 +12,7 @@ import Link from 'next/link';
 const navigation = [
   { name: 'Super Admin', href: '/management', icon: Cog8ToothIcon, current: false },
   { name: 'Home', href: '/', icon: HomeIcon, current: true },
-  { name: 'Dashboard', href: '#', icon: CheckBadgeIcon, current: false }, // TODO: ONLY SHOW WHEN USER IS LOGGED IN
+  { name: 'Dashboard', href: '/2134/dashboard', icon: CheckBadgeIcon, current: false }, // TODO: ONLY SHOW WHEN USER IS LOGGED IN
   { name: 'Popular', href: '#', icon: FireIcon, current: false },
   { name: 'Trending', href: '#', icon: ArrowTrendingUpIcon, current: false },
 ];
