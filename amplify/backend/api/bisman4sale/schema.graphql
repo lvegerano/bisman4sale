@@ -6,10 +6,9 @@ input AMPLIFY {
 }
 
 type Category @model(subscriptions: null) {
-  id: ID! @primaryKey
-  name: String!
-  parentID: ID @index(sortKeyFields: ["id"])
-  nodeID: String! @index(sortKeyFields: ["id"])
+  name: String! @primaryKey
+  parentID: String
+  nodeID: Int!
   path: String!
 }
 
