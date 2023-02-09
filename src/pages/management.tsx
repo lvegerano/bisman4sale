@@ -1,9 +1,9 @@
 import AppWrapper from '@components/AppWrapper';
-// import { useForm } from 'react-hook-form';
-// import { API } from 'aws-amplify';
-// import * as mutations from '../graphql/mutations';
-// import categories from '@utils/prod_categories.json';
-// import { FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
+import { API } from 'aws-amplify';
+import * as mutations from '../graphql/mutations';
+import categories from '@utils/prod_categories.json';
+import { FormEvent } from 'react';
 
 type AddCategoryFormData = {
   category: string;
@@ -11,64 +11,65 @@ type AddCategoryFormData = {
 
 type Props = {};
 
-const management = (props: Props) => {
-  // const { register, handleSubmit } = useForm<AddCategoryFormData>();
-  // const onSubmit = handleSubmit(async (data) => {
-  //   const { category } = data;
-  //   const newCategory = await API.graphql({
-  //     query: mutations.createCategory,
-  //     variables: {
-  //       input: {
-  //         name: category,
-  //       },
-  //     },
-  //   });
-  // });
+const Management = (props: Props) => {
+  const { register, handleSubmit } = useForm<AddCategoryFormData>();
+  const onSubmit = handleSubmit(async (data) => {
+    const { category } = data;
+    const newCategory = await API.graphql({
+      query: mutations.createCategory,
+      variables: {
+        input: {
+          name: category,
+        },
+      },
+    });
+  });
 
-  // const seedCategories = async (obj: any, parentID: any = null) => {
-  //   const query = /* GraphQL*/ `
-  //     mutation CreateCategory(
-  //       $input: CreateCategoryInput!
-  //       $condition: ModelCategoryConditionInput
-  //     ) {
-  //       createCategory(input: $input, condition: $condition) {
-  //         id
-  //         parentID
-  //         name
-  //       }
-  //     }
-  //   `;
-  //   try {
-  //     for (const [key, value] of Object.entries(obj)) {
-  //       const { data } = await API.graphql({
-  //         query,
-  //         variables: {
-  //           input: {
-  //             name: key,
-  //             parentID,
-  //           },
-  //         },
-  //       });
+  const seedCategories = async (obj: any, parentID: any = null) => {
+    try {
+      // console.log(obj);
+      // obj.forEach(async (cat: any) => {
+      //   const { name, parent, nodeid, path } = cat;
+      // });
+      for (const { name, parent, nodeid, path } of obj) {
+        // console.log(name, parent, nodeid, path);
+        try {
+          await API.graphql({
+            query: mutations.createCategory,
+            variables: {
+              input: {
+                name,
+                parent,
+                nodeID: nodeid,
+                path,
+              },
+            },
+          });
+        } catch (e) {
+          console.log('ERROR', name, parent, nodeid, path);
+        }
+      }
+      // goo
 
-  //       const { createCategory } = data;
+      //   const { createCategory } = data;
 
-  //       if (Object.keys(value).length) {
-  //         await seedCategories(value, createCategory.id); // instead of res it should be the inserted key id
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+      //   if (Object.keys(value).length) {
+      //     await seedCategories(value, createCategory.id); // instead of res it should be the inserted key id
+      //   }
+      // }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  // const SeedData = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   await seedCategories(JSON.parse(categories));
-  // };
+  const SeedData = async (e: FormEvent) => {
+    e.preventDefault();
+    await seedCategories(categories);
+  };
 
   return (
     <AppWrapper>
-      {/* <main className="lg:col-span-9 xl:col-span-6">
+      <main className="lg:col-span-9 xl:col-span-6">
         <form onSubmit={onSubmit}>
           <div className="shadow sm:overflow-hidden sm:rounded-md">
             <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
@@ -98,8 +99,8 @@ const management = (props: Props) => {
               </button>
             </div>
           </div>
-        </form> */}
-      {/* <form onSubmit={SeedData}>
+        </form>
+        <form onSubmit={SeedData}>
           <div className="shadow sm:overflow-hidden sm:rounded-md">
             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
               <button
@@ -110,10 +111,10 @@ const management = (props: Props) => {
               </button>
             </div>
           </div>
-        </form> */}
-      {/* </main> */}
+        </form>
+      </main>
     </AppWrapper>
   );
 };
 
-export default management;
+export default Management;

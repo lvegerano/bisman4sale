@@ -7,8 +7,8 @@ input AMPLIFY {
 
 type Category @model(subscriptions: null) {
   name: String! @primaryKey
-  parentID: String
-  nodeID: Int!
+  parent: String @index(name: "byParent", queryField: "categoriesByParent", sortKeyFields: ["name"])
+  nodeID: Int! @index(name: "byNodeID", queryField: "categoriesByNode", sortKeyFields: ["name"])
   path: String!
 }
 

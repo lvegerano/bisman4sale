@@ -9,7 +9,7 @@ export const createCategory = /* GraphQL */ `
   ) {
     createCategory(input: $input, condition: $condition) {
       name
-      parentID
+      parent
       nodeID
       path
       createdAt
@@ -24,7 +24,7 @@ export const updateCategory = /* GraphQL */ `
   ) {
     updateCategory(input: $input, condition: $condition) {
       name
-      parentID
+      parent
       nodeID
       path
       createdAt
@@ -39,7 +39,7 @@ export const deleteCategory = /* GraphQL */ `
   ) {
     deleteCategory(input: $input, condition: $condition) {
       name
-      parentID
+      parent
       nodeID
       path
       createdAt

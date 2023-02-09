@@ -8,51 +8,35 @@ import {
 import { classNames } from 'src/utils/classnames';
 import React from 'react';
 import Link from 'next/link';
+import { Category } from 'src/types/category';
+import { getBaseCategories } from '@utils/getBaseCategories';
 
 const navigation = [
   { name: 'Super Admin', href: '/management', icon: Cog8ToothIcon, current: false },
   { name: 'Home', href: '/', icon: HomeIcon, current: true },
-  { name: 'Dashboard', href: '/2134/dashboard', icon: CheckBadgeIcon, current: false }, // TODO: ONLY SHOW WHEN USER IS LOGGED IN
+  { name: 'Dashboard', href: '/user/2134', icon: CheckBadgeIcon, current: false }, // TODO: ONLY SHOW WHEN USER IS LOGGED IN
   { name: 'Popular', href: '#', icon: FireIcon, current: false },
   { name: 'Trending', href: '#', icon: ArrowTrendingUpIcon, current: false },
 ];
 
-const categories = [
-  { name: 'Animals & Pet Supplies', path: 'Animals & Pet Supplies', nodeid: 1 },
-  { name: 'Apparel & Accessories', path: 'Apparel & Accessories', nodeid: 2 },
-  { name: 'Arts & Entertainment', path: 'Arts & Entertainment', nodeid: 3 },
-  { name: 'Baby & Toddler', path: 'Baby & Toddler', nodeid: 4 },
-  { name: 'Business & Industrial', path: 'Business & Industrial', nodeid: 5 },
-  { name: 'Cameras & Optics', path: 'Cameras & Optics', nodeid: 6 },
-  { name: 'Electronics', path: 'Electronics', nodeid: 7 },
-  { name: 'Food, Beverages & Tobacco', path: 'Food, Beverages & Tobacco', nodeid: 8 },
-  { name: 'Furniture', path: 'Furniture', nodeid: 9 },
-  { name: 'Hardware', path: 'Hardware', nodeid: 10 },
-  { name: 'Health & Beauty', path: 'Health & Beauty', nodeid: 11 },
-  { name: 'Home & Garden', path: 'Home & Garden', nodeid: 12 },
-  { name: 'Luggage & Bags', path: 'Luggage & Bags', nodeid: 13 },
-  { name: 'Mature', path: 'Mature', nodeid: 14 },
-  { name: 'Media', path: 'Media', nodeid: 15 },
-  { name: 'Office Supplies', path: 'Office Supplies', nodeid: 16 },
-  { name: 'Religious & Ceremonial', path: 'Religious & Ceremonial', nodeid: 17 },
-  { name: 'Sporting Goods', path: 'Sporting Goods', nodeid: 19 },
-  { name: 'Toys & Games', path: 'Toys & Games', nodeid: 20 },
-  { name: 'Vehicles & Parts', path: 'Vehicles & Parts', nodeid: 21 },
-];
+const seoSlug = (slug: string | undefined) => {
+  if (!slug) return '';
 
-const seoSlug = (slug: string) => {
   return slug
     .replace(/[^a-z0-9]|\s+/gim, ' ')
     .replace(/\s+/gim, '-')
     .toLowerCase();
 };
 
-type Props = {};
+type ContentSidebarProps = {
+  categories?: Partial<Category>[];
+};
 
-const ContentSidebar = (props: Props) => {
-  const topCategories = categories.map((category) => ({
+const ContentSidebar = ({ categories }: ContentSidebarProps) => {
+  const baseCategories = getBaseCategories();
+  const topCategories = (categories || baseCategories).map((category) => ({
     ...category,
-    href: `/${encodeURIComponent(seoSlug(category.name))}`,
+    href: `/${category?.nodeID}/${encodeURIComponent(seoSlug(category?.name))}`,
   }));
 
   return (

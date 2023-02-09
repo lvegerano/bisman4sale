@@ -4,13 +4,13 @@
 
 export type CreateCategoryInput = {
   name: string,
-  parentID?: string | null,
+  parent?: string | null,
   nodeID: number,
   path: string,
 };
 
 export type ModelCategoryConditionInput = {
-  parentID?: ModelStringInput | null,
+  parent?: ModelStringInput | null,
   nodeID?: ModelIntInput | null,
   path?: ModelStringInput | null,
   and?: Array< ModelCategoryConditionInput | null > | null,
@@ -73,7 +73,7 @@ export type ModelIntInput = {
 export type Category = {
   __typename: "Category",
   name: string,
-  parentID?: string | null,
+  parent?: string | null,
   nodeID: number,
   path: string,
   createdAt: string,
@@ -82,7 +82,7 @@ export type Category = {
 
 export type UpdateCategoryInput = {
   name: string,
-  parentID?: string | null,
+  parent?: string | null,
   nodeID?: number | null,
   path?: string | null,
 };
@@ -93,7 +93,7 @@ export type DeleteCategoryInput = {
 
 export type ModelCategoryFilterInput = {
   name?: ModelStringInput | null,
-  parentID?: ModelStringInput | null,
+  parent?: ModelStringInput | null,
   nodeID?: ModelIntInput | null,
   path?: ModelStringInput | null,
   and?: Array< ModelCategoryFilterInput | null > | null,
@@ -113,6 +113,16 @@ export type ModelCategoryConnection = {
   nextToken?: string | null,
 };
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
 export type CreateCategoryMutationVariables = {
   input: CreateCategoryInput,
   condition?: ModelCategoryConditionInput | null,
@@ -122,7 +132,7 @@ export type CreateCategoryMutation = {
   createCategory?:  {
     __typename: "Category",
     name: string,
-    parentID?: string | null,
+    parent?: string | null,
     nodeID: number,
     path: string,
     createdAt: string,
@@ -139,7 +149,7 @@ export type UpdateCategoryMutation = {
   updateCategory?:  {
     __typename: "Category",
     name: string,
-    parentID?: string | null,
+    parent?: string | null,
     nodeID: number,
     path: string,
     createdAt: string,
@@ -156,7 +166,7 @@ export type DeleteCategoryMutation = {
   deleteCategory?:  {
     __typename: "Category",
     name: string,
-    parentID?: string | null,
+    parent?: string | null,
     nodeID: number,
     path: string,
     createdAt: string,
@@ -172,7 +182,7 @@ export type GetCategoryQuery = {
   getCategory?:  {
     __typename: "Category",
     name: string,
-    parentID?: string | null,
+    parent?: string | null,
     nodeID: number,
     path: string,
     createdAt: string,
@@ -194,7 +204,57 @@ export type ListCategoriesQuery = {
     items:  Array< {
       __typename: "Category",
       name: string,
-      parentID?: string | null,
+      parent?: string | null,
+      nodeID: number,
+      path: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type CategoriesByParentQueryVariables = {
+  parent: string,
+  name?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type CategoriesByParentQuery = {
+  categoriesByParent?:  {
+    __typename: "ModelCategoryConnection",
+    items:  Array< {
+      __typename: "Category",
+      name: string,
+      parent?: string | null,
+      nodeID: number,
+      path: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type CategoriesByNodeQueryVariables = {
+  nodeID: number,
+  name?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type CategoriesByNodeQuery = {
+  categoriesByNode?:  {
+    __typename: "ModelCategoryConnection",
+    items:  Array< {
+      __typename: "Category",
+      name: string,
+      parent?: string | null,
       nodeID: number,
       path: string,
       createdAt: string,
