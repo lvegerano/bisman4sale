@@ -17,20 +17,44 @@ const navigation = [
   { name: 'Trending', href: '#', icon: ArrowTrendingUpIcon, current: false },
 ];
 
-const communities = [
-  { name: 'Movies', href: '#' },
-  { name: 'Food', href: '#' },
-  { name: 'Sports', href: '#' },
-  { name: 'Animals', href: '#' },
-  { name: 'Science', href: '#' },
-  { name: 'Dinosaurs', href: '#' },
-  { name: 'Talents', href: '#' },
-  { name: 'Gaming', href: '#' },
+const categories = [
+  { name: 'Animals & Pet Supplies', path: 'Animals & Pet Supplies', nodeid: 1 },
+  { name: 'Apparel & Accessories', path: 'Apparel & Accessories', nodeid: 2 },
+  { name: 'Arts & Entertainment', path: 'Arts & Entertainment', nodeid: 3 },
+  { name: 'Baby & Toddler', path: 'Baby & Toddler', nodeid: 4 },
+  { name: 'Business & Industrial', path: 'Business & Industrial', nodeid: 5 },
+  { name: 'Cameras & Optics', path: 'Cameras & Optics', nodeid: 6 },
+  { name: 'Electronics', path: 'Electronics', nodeid: 7 },
+  { name: 'Food, Beverages & Tobacco', path: 'Food, Beverages & Tobacco', nodeid: 8 },
+  { name: 'Furniture', path: 'Furniture', nodeid: 9 },
+  { name: 'Hardware', path: 'Hardware', nodeid: 10 },
+  { name: 'Health & Beauty', path: 'Health & Beauty', nodeid: 11 },
+  { name: 'Home & Garden', path: 'Home & Garden', nodeid: 12 },
+  { name: 'Luggage & Bags', path: 'Luggage & Bags', nodeid: 13 },
+  { name: 'Mature', path: 'Mature', nodeid: 14 },
+  { name: 'Media', path: 'Media', nodeid: 15 },
+  { name: 'Office Supplies', path: 'Office Supplies', nodeid: 16 },
+  { name: 'Religious & Ceremonial', path: 'Religious & Ceremonial', nodeid: 17 },
+  { name: 'Sporting Goods', path: 'Sporting Goods', nodeid: 19 },
+  { name: 'Toys & Games', path: 'Toys & Games', nodeid: 20 },
+  { name: 'Vehicles & Parts', path: 'Vehicles & Parts', nodeid: 21 },
 ];
+
+const seoSlug = (slug: string) => {
+  return slug
+    .replace(/[^a-z0-9]|\s+/gim, ' ')
+    .replace(/\s+/gim, '-')
+    .toLowerCase();
+};
 
 type Props = {};
 
 const ContentSidebar = (props: Props) => {
+  const topCategories = categories.map((category) => ({
+    ...category,
+    href: `/${encodeURIComponent(seoSlug(category.name))}`,
+  }));
+
   return (
     <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
       <nav aria-label="Sidebar" className="sticky top-4 divide-y divide-gray-300">
@@ -57,18 +81,18 @@ const ContentSidebar = (props: Props) => {
           ))}
         </div>
         <div className="pt-10">
-          <p className="px-3 text-sm font-medium text-gray-500" id="communities-headline">
-            Communities
+          <p className="px-3 text-sm font-medium text-gray-500" id="categories-headline">
+            Categories
           </p>
-          <div className="mt-3 space-y-2" aria-labelledby="communities-headline">
-            {communities.map((community) => (
-              <a
-                key={community.name}
-                href={community.href}
+          <div className="mt-3 space-y-2" aria-labelledby="categories-headline">
+            {topCategories.map((category) => (
+              <Link
+                key={category.name}
+                href={category.href}
                 className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
-                <span className="truncate">{community.name}</span>
-              </a>
+                <span className="truncate">{category.name}</span>
+              </Link>
             ))}
           </div>
         </div>

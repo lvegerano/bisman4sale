@@ -8,7 +8,6 @@ export const createCategory = /* GraphQL */ `
     $condition: ModelCategoryConditionInput
   ) {
     createCategory(input: $input, condition: $condition) {
-      id
       name
       parentID
       nodeID
@@ -24,7 +23,6 @@ export const updateCategory = /* GraphQL */ `
     $condition: ModelCategoryConditionInput
   ) {
     updateCategory(input: $input, condition: $condition) {
-      id
       name
       parentID
       nodeID
@@ -40,7 +38,6 @@ export const deleteCategory = /* GraphQL */ `
     $condition: ModelCategoryConditionInput
   ) {
     deleteCategory(input: $input, condition: $condition) {
-      id
       name
       parentID
       nodeID
