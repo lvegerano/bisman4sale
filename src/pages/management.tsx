@@ -38,10 +38,10 @@ const Management = (props: Props) => {
             query: mutations.createCategory,
             variables: {
               input: {
-                name,
-                parent,
+                name: name.toLocaleLowerCase(),
+                parent: parent.toLocaleLowerCase(),
                 nodeID: nodeid,
-                path,
+                path: path.toLocaleLowerCase(),
               },
             },
           });

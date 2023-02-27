@@ -8,8 +8,8 @@ import {
 import { classNames } from 'src/utils/classnames';
 import React from 'react';
 import Link from 'next/link';
-import { Category } from 'src/types/category';
 import { getBaseCategories } from '@utils/getBaseCategories';
+import { Category } from 'src/API';
 
 const navigation = [
   { name: 'Super Admin', href: '/management', icon: Cog8ToothIcon, current: false },

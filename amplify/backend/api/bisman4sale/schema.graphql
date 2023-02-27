@@ -45,17 +45,23 @@ type Category @model(subscriptions: null) {
 #   createdAt: AWSDateTime!
 # }
 
-# type Ad @model(subscriptions: null) {
-#   name: String!
-#   description: String
-#   condition: String
-#   price: String
-#   status: String
-#   category: String!
-#   images: [Image] @hasMany
-#   watchLists: [WatchList] @manyToMany(relationName: "AdWatchLists")
-# }
+type Ad @searchable @model(subscriptions: null) {
+  name: String!
+  description: String!
+  condition: String!
+  price: String
+  status: String
+  categoryPath: String!
+  images: [Image] @hasMany
+  imageCount: Int
+  paidImages: Boolean
+  userID: String!
+  expiration: AWSDateTime!
+  autoRelist: Boolean
+  scheduledRelist: Int!
+  # watchLists: [WatchList] @manyToMany(relationName: "AdWatchLists")
+}
 
-# type Image @model(subscriptions: null) {
-#   description: String!
-# }
+type Image @model(subscriptions: null) {
+  url: String!
+}
