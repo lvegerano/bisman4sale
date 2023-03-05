@@ -11,7 +11,7 @@
       "name": "ServerSide Debug",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run dev"
+      "command": "pnpm run dev"
     },
     {
       "name": "ClientSide Debug",
@@ -23,7 +23,7 @@
       "name": "FullStack",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run dev",
+      "command": "pnpm run dev",
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
