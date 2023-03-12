@@ -5,9 +5,11 @@ import PriceInput from '@components/PriceInput';
 import { Switch } from '@headlessui/react';
 import { classNames } from '@utils/classnames';
 import { GetServerSideProps } from 'next/types';
-import { useEffect, useState } from 'react';
-import { withSSRContext, API } from 'aws-amplify';
+import { useState } from 'react';
 import * as queries from '@graphql/queries';
+import { API } from 'aws-amplify';
+import { ListCompCategoriesQuery } from 'src/API';
+import { CompCategoryType } from 'src/API.types';
 import CategoriesDropdown from '@components/CategoriesDropdown';
 
 const priceOptions = [
@@ -30,26 +32,26 @@ const priceOptions = [
   // },
 ];
 
-const sectionDescriptions = {
-  title: '',
-  description: '',
-  images: '',
+export const getServerSideProps: GetServerSideProps = async () => {
+  const categories = (await API.graphql({
+    query: queries.listCompCategories,
+  })) as { data: ListCompCategoriesQuery };
+
+  return {
+    props: {
+      categories: categories.data.listCompCategories?.items,
+    },
+  };
 };
 
-type ICreateProps = {};
+type CreateProps = {
+  categories: CompCategoryType[];
+};
 
-const Create = ({}: ICreateProps) => {
-  const [categories, setCategories] = useState([]);
+const Create = ({ categories }: CreateProps) => {
+  const [category, setCategory] = useState<CompCategoryType>();
   const [enabled, setEnabled] = useState(false);
   const [priceOption, setPriceOption] = useState<string | number>('price');
-
-  // useEffect(() => {
-  //   const getCategories = async () => {
-  //     const cats = await API.graphql({
-  //       query: queries.listCategories(limit),
-  //     });
-  //   };
-  // }, []);
 
   return (
     <AppWrapper showSidebar={false}>
@@ -152,7 +154,11 @@ const Create = ({}: ICreateProps) => {
 
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
-                    <CategoriesDropdown />
+                    <CategoriesDropdown
+                      value={category}
+                      categories={categories}
+                      onSelectedCategory={setCategory}
+                    />
                   </div>
                 </div>
 
@@ -189,7 +195,7 @@ const Create = ({}: ICreateProps) => {
                         </label>
                         <p className="pl-1">or drag and drop</p>
                       </div>
-                      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                      <p className="text-xs text-gray-500">PNG, JPG, GIF</p>
                     </div>
                   </div>
                 </div>

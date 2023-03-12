@@ -1,9 +1,12 @@
 import AppWrapper from '@components/AppWrapper';
 import { useForm } from 'react-hook-form';
 import { API } from 'aws-amplify';
+import { GraphQLQuery } from '@aws-amplify/api';
 import * as mutations from '../graphql/mutations';
 import categories from '@utils/prod_categories.json';
+import compCategories from '@utils/comp_categories.json';
 import { FormEvent } from 'react';
+import { CreateAdMutation, CreateCompCategoryMutation } from 'src/API';
 
 type AddCategoryFormData = {
   category: string;
@@ -62,11 +65,48 @@ const Management = (props: Props) => {
     }
   };
 
-  const seedData = async (categories: { [key: string]: string[] }) => {};
+  let currentParent;
+  const seedData = async (categories: { [key: string]: string[] }) => {
+    console.log(categories);
+    Object.entries(categories).forEach(async ([key, value]) => {
+      const cat = await API.graphql<GraphQLQuery<CreateCompCategoryMutation>>({
+        query: mutations.createCompCategory,
+        variables: {
+          input: {
+            name: key,
+          },
+        },
+      });
+
+      value.forEach(async (childCat) => {
+        await API.graphql<GraphQLQuery<CreateCompCategoryMutation>>({
+          query: mutations.createCompCategory,
+          variables: {
+            input: {
+              name: childCat,
+              parent: cat.data.createCompCategory.id,
+            },
+          },
+        });
+      });
+
+      await API.graphql<GraphQLQuery<CreateCompCategoryMutation>>({
+        query: mutations.createCompCategory,
+        variables: {
+          input: {
+            name: key,
+          },
+        },
+      });
+
+      console.log('category response', cat);
+    });
+  };
 
   const SeedData = async (e: FormEvent) => {
     e.preventDefault();
     // await seedCategories(categories);
+    await seedData(compCategories);
   };
 
   return (
