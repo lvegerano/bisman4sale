@@ -1,6 +1,6 @@
 {
   "api": {
-    "bisman4sale": {
+    "bismanforsale": {
       "dependsOn": [],
       "output": {
         "authConfig": {
@@ -15,35 +15,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
-    }
-  },
-  "auth": {
-    "bisman4sale8354c318": {
-      "customAuth": false,
-      "dependsOn": [],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [
-          "FACEBOOK",
-          "GOOGLE"
-        ],
-        "usernameAttributes": [],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito"
     }
   }
 }

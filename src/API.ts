@@ -2,262 +2,991 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateCategoryInput = {
-  name: string;
-  parent?: string | null;
-  nodeID: number;
-  path: string;
+export type CreateCompCategoryInput = {
+  id?: string | null,
+  name: string,
+  parent?: string | null,
 };
 
-export type ModelCategoryConditionInput = {
-  parent?: ModelStringInput | null;
-  nodeID?: ModelIntInput | null;
-  path?: ModelStringInput | null;
-  and?: Array<ModelCategoryConditionInput | null> | null;
-  or?: Array<ModelCategoryConditionInput | null> | null;
-  not?: ModelCategoryConditionInput | null;
+export type ModelCompCategoryConditionInput = {
+  name?: ModelStringInput | null,
+  parent?: ModelStringInput | null,
+  and?: Array< ModelCompCategoryConditionInput | null > | null,
+  or?: Array< ModelCompCategoryConditionInput | null > | null,
+  not?: ModelCompCategoryConditionInput | null,
 };
 
 export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export enum ModelAttributeTypes {
-  binary = 'binary',
-  binarySet = 'binarySet',
-  bool = 'bool',
-  list = 'list',
-  map = 'map',
-  number = 'number',
-  numberSet = 'numberSet',
-  string = 'string',
-  stringSet = 'stringSet',
-  _null = '_null',
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
 }
 
+
 export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type CompCategory = {
+  __typename: "CompCategory",
+  id: string,
+  name: string,
+  parent?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateCompCategoryInput = {
+  id: string,
+  name?: string | null,
+  parent?: string | null,
+};
+
+export type DeleteCompCategoryInput = {
+  id: string,
+};
+
+export type CreateAdInput = {
+  id?: string | null,
+  name: string,
+  description: string,
+  condition: string,
+  price?: string | null,
+  status?: string | null,
+  imageCount?: number | null,
+  paidImages?: boolean | null,
+  userID: string,
+  expiration: string,
+  autoRelist?: boolean | null,
+  scheduledRelist: number,
+  sold?: boolean | null,
+  categoryID: string,
+};
+
+export type ModelAdConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  condition?: ModelStringInput | null,
+  price?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  imageCount?: ModelIntInput | null,
+  paidImages?: ModelBooleanInput | null,
+  userID?: ModelStringInput | null,
+  expiration?: ModelStringInput | null,
+  autoRelist?: ModelBooleanInput | null,
+  scheduledRelist?: ModelIntInput | null,
+  sold?: ModelBooleanInput | null,
+  categoryID?: ModelIDInput | null,
+  and?: Array< ModelAdConditionInput | null > | null,
+  or?: Array< ModelAdConditionInput | null > | null,
+  not?: ModelAdConditionInput | null,
 };
 
 export type ModelIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
-export type Category = {
-  __typename: 'Category';
-  name: string;
-  parent?: string | null;
-  nodeID: number;
-  path: string;
-  createdAt: string;
-  updatedAt: string;
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
-export type UpdateCategoryInput = {
-  name: string;
-  parent?: string | null;
-  nodeID?: number | null;
-  path?: string | null;
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
-export type DeleteCategoryInput = {
-  name: string;
+export type Ad = {
+  __typename: "Ad",
+  id: string,
+  name: string,
+  description: string,
+  condition: string,
+  price?: string | null,
+  status?: string | null,
+  images?: ModelImageConnection | null,
+  imageCount?: number | null,
+  paidImages?: boolean | null,
+  userID: string,
+  expiration: string,
+  autoRelist?: boolean | null,
+  scheduledRelist: number,
+  sold?: boolean | null,
+  categoryID: string,
+  compCategory?: CompCategory | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
-export type ModelCategoryFilterInput = {
-  name?: ModelStringInput | null;
-  parent?: ModelStringInput | null;
-  nodeID?: ModelIntInput | null;
-  path?: ModelStringInput | null;
-  and?: Array<ModelCategoryFilterInput | null> | null;
-  or?: Array<ModelCategoryFilterInput | null> | null;
-  not?: ModelCategoryFilterInput | null;
+export type ModelImageConnection = {
+  __typename: "ModelImageConnection",
+  items:  Array<Image | null >,
+  nextToken?: string | null,
+};
+
+export type Image = {
+  __typename: "Image",
+  id: string,
+  adID: string,
+  url: string,
+  sort: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateAdInput = {
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  condition?: string | null,
+  price?: string | null,
+  status?: string | null,
+  imageCount?: number | null,
+  paidImages?: boolean | null,
+  userID?: string | null,
+  expiration?: string | null,
+  autoRelist?: boolean | null,
+  scheduledRelist?: number | null,
+  sold?: boolean | null,
+  categoryID?: string | null,
+};
+
+export type DeleteAdInput = {
+  id: string,
+};
+
+export type CreateImageInput = {
+  id?: string | null,
+  adID: string,
+  url: string,
+  sort: number,
+};
+
+export type ModelImageConditionInput = {
+  adID?: ModelIDInput | null,
+  url?: ModelStringInput | null,
+  sort?: ModelIntInput | null,
+  and?: Array< ModelImageConditionInput | null > | null,
+  or?: Array< ModelImageConditionInput | null > | null,
+  not?: ModelImageConditionInput | null,
+};
+
+export type UpdateImageInput = {
+  id: string,
+  adID?: string | null,
+  url?: string | null,
+  sort?: number | null,
+};
+
+export type DeleteImageInput = {
+  id: string,
+};
+
+export type SearchableAdFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  name?: SearchableStringFilterInput | null,
+  description?: SearchableStringFilterInput | null,
+  condition?: SearchableStringFilterInput | null,
+  price?: SearchableStringFilterInput | null,
+  status?: SearchableStringFilterInput | null,
+  imageCount?: SearchableIntFilterInput | null,
+  paidImages?: SearchableBooleanFilterInput | null,
+  userID?: SearchableStringFilterInput | null,
+  expiration?: SearchableStringFilterInput | null,
+  autoRelist?: SearchableBooleanFilterInput | null,
+  scheduledRelist?: SearchableIntFilterInput | null,
+  sold?: SearchableBooleanFilterInput | null,
+  categoryID?: SearchableIDFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableAdFilterInput | null > | null,
+  or?: Array< SearchableAdFilterInput | null > | null,
+  not?: SearchableAdFilterInput | null,
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableIntFilterInput = {
+  ne?: number | null,
+  gt?: number | null,
+  lt?: number | null,
+  gte?: number | null,
+  lte?: number | null,
+  eq?: number | null,
+  range?: Array< number | null > | null,
+};
+
+export type SearchableBooleanFilterInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
+};
+
+export type SearchableAdSortInput = {
+  field?: SearchableAdSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableAdSortableFields {
+  id = "id",
+  name = "name",
+  description = "description",
+  condition = "condition",
+  price = "price",
+  status = "status",
+  imageCount = "imageCount",
+  paidImages = "paidImages",
+  userID = "userID",
+  expiration = "expiration",
+  autoRelist = "autoRelist",
+  scheduledRelist = "scheduledRelist",
+  sold = "sold",
+  categoryID = "categoryID",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+
+export type SearchableAdAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableAdAggregateField,
+};
+
+export enum SearchableAggregateType {
+  terms = "terms",
+  avg = "avg",
+  min = "min",
+  max = "max",
+  sum = "sum",
+}
+
+
+export enum SearchableAdAggregateField {
+  id = "id",
+  name = "name",
+  description = "description",
+  condition = "condition",
+  price = "price",
+  status = "status",
+  imageCount = "imageCount",
+  paidImages = "paidImages",
+  userID = "userID",
+  expiration = "expiration",
+  autoRelist = "autoRelist",
+  scheduledRelist = "scheduledRelist",
+  sold = "sold",
+  categoryID = "categoryID",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableAdConnection = {
+  __typename: "SearchableAdConnection",
+  items:  Array<Ad | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type SearchableAggregateResult = {
+  __typename: "SearchableAggregateResult",
+  name: string,
+  result?: SearchableAggregateGenericResult | null,
+};
+
+export type SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+
+
+export type SearchableAggregateScalarResult = {
+  __typename: "SearchableAggregateScalarResult",
+  value: number,
+};
+
+export type SearchableAggregateBucketResult = {
+  __typename: "SearchableAggregateBucketResult",
+  buckets?:  Array<SearchableAggregateBucketResultItem | null > | null,
+};
+
+export type SearchableAggregateBucketResultItem = {
+  __typename: "SearchableAggregateBucketResultItem",
+  key: string,
+  doc_count: number,
+};
+
+export type ModelCompCategoryFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  parent?: ModelStringInput | null,
+  and?: Array< ModelCompCategoryFilterInput | null > | null,
+  or?: Array< ModelCompCategoryFilterInput | null > | null,
+  not?: ModelCompCategoryFilterInput | null,
 };
 
 export enum ModelSortDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
+  ASC = "ASC",
+  DESC = "DESC",
 }
 
-export type ModelCategoryConnection = {
-  __typename: 'ModelCategoryConnection';
-  items: Array<Category | null>;
-  nextToken?: string | null;
+
+export type ModelCompCategoryConnection = {
+  __typename: "ModelCompCategoryConnection",
+  items:  Array<CompCategory | null >,
+  nextToken?: string | null,
+};
+
+export type ModelAdFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  condition?: ModelStringInput | null,
+  price?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  imageCount?: ModelIntInput | null,
+  paidImages?: ModelBooleanInput | null,
+  userID?: ModelStringInput | null,
+  expiration?: ModelStringInput | null,
+  autoRelist?: ModelBooleanInput | null,
+  scheduledRelist?: ModelIntInput | null,
+  sold?: ModelBooleanInput | null,
+  categoryID?: ModelIDInput | null,
+  and?: Array< ModelAdFilterInput | null > | null,
+  or?: Array< ModelAdFilterInput | null > | null,
+  not?: ModelAdFilterInput | null,
+};
+
+export type ModelAdConnection = {
+  __typename: "ModelAdConnection",
+  items:  Array<Ad | null >,
+  nextToken?: string | null,
+};
+
+export type ModelImageFilterInput = {
+  id?: ModelIDInput | null,
+  adID?: ModelIDInput | null,
+  url?: ModelStringInput | null,
+  sort?: ModelIntInput | null,
+  and?: Array< ModelImageFilterInput | null > | null,
+  or?: Array< ModelImageFilterInput | null > | null,
+  not?: ModelImageFilterInput | null,
 };
 
 export type ModelStringKeyConditionInput = {
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
-export type CreateCategoryMutationVariables = {
-  input: CreateCategoryInput;
-  condition?: ModelCategoryConditionInput | null;
+export type CreateCompCategoryMutationVariables = {
+  input: CreateCompCategoryInput,
+  condition?: ModelCompCategoryConditionInput | null,
 };
 
-export type CreateCategoryMutation = {
-  createCategory?: {
-    __typename: 'Category';
-    name: string;
-    parent?: string | null;
-    nodeID: number;
-    path: string;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+export type CreateCompCategoryMutation = {
+  createCompCategory?:  {
+    __typename: "CompCategory",
+    id: string,
+    name: string,
+    parent?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
-export type UpdateCategoryMutationVariables = {
-  input: UpdateCategoryInput;
-  condition?: ModelCategoryConditionInput | null;
+export type UpdateCompCategoryMutationVariables = {
+  input: UpdateCompCategoryInput,
+  condition?: ModelCompCategoryConditionInput | null,
 };
 
-export type UpdateCategoryMutation = {
-  updateCategory?: {
-    __typename: 'Category';
-    name: string;
-    parent?: string | null;
-    nodeID: number;
-    path: string;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+export type UpdateCompCategoryMutation = {
+  updateCompCategory?:  {
+    __typename: "CompCategory",
+    id: string,
+    name: string,
+    parent?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
-export type DeleteCategoryMutationVariables = {
-  input: DeleteCategoryInput;
-  condition?: ModelCategoryConditionInput | null;
+export type DeleteCompCategoryMutationVariables = {
+  input: DeleteCompCategoryInput,
+  condition?: ModelCompCategoryConditionInput | null,
 };
 
-export type DeleteCategoryMutation = {
-  deleteCategory?: {
-    __typename: 'Category';
-    name: string;
-    parent?: string | null;
-    nodeID: number;
-    path: string;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+export type DeleteCompCategoryMutation = {
+  deleteCompCategory?:  {
+    __typename: "CompCategory",
+    id: string,
+    name: string,
+    parent?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
-export type GetCategoryQueryVariables = {
-  name: string;
+export type CreateAdMutationVariables = {
+  input: CreateAdInput,
+  condition?: ModelAdConditionInput | null,
 };
 
-export type GetCategoryQuery = {
-  getCategory?: {
-    __typename: 'Category';
-    name: string;
-    parent?: string | null;
-    nodeID: number;
-    path: string;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+export type CreateAdMutation = {
+  createAd?:  {
+    __typename: "Ad",
+    id: string,
+    name: string,
+    description: string,
+    condition: string,
+    price?: string | null,
+    status?: string | null,
+    images?:  {
+      __typename: "ModelImageConnection",
+      items:  Array< {
+        __typename: "Image",
+        id: string,
+        adID: string,
+        url: string,
+        sort: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imageCount?: number | null,
+    paidImages?: boolean | null,
+    userID: string,
+    expiration: string,
+    autoRelist?: boolean | null,
+    scheduledRelist: number,
+    sold?: boolean | null,
+    categoryID: string,
+    compCategory?:  {
+      __typename: "CompCategory",
+      id: string,
+      name: string,
+      parent?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
-export type ListCategoriesQueryVariables = {
-  name?: string | null;
-  filter?: ModelCategoryFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
+export type UpdateAdMutationVariables = {
+  input: UpdateAdInput,
+  condition?: ModelAdConditionInput | null,
 };
 
-export type ListCategoriesQuery = {
-  listCategories?: {
-    __typename: 'ModelCategoryConnection';
-    items: Array<{
-      __typename: 'Category';
-      name: string;
-      parent?: string | null;
-      nodeID: number;
-      path: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+export type UpdateAdMutation = {
+  updateAd?:  {
+    __typename: "Ad",
+    id: string,
+    name: string,
+    description: string,
+    condition: string,
+    price?: string | null,
+    status?: string | null,
+    images?:  {
+      __typename: "ModelImageConnection",
+      items:  Array< {
+        __typename: "Image",
+        id: string,
+        adID: string,
+        url: string,
+        sort: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imageCount?: number | null,
+    paidImages?: boolean | null,
+    userID: string,
+    expiration: string,
+    autoRelist?: boolean | null,
+    scheduledRelist: number,
+    sold?: boolean | null,
+    categoryID: string,
+    compCategory?:  {
+      __typename: "CompCategory",
+      id: string,
+      name: string,
+      parent?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteAdMutationVariables = {
+  input: DeleteAdInput,
+  condition?: ModelAdConditionInput | null,
+};
+
+export type DeleteAdMutation = {
+  deleteAd?:  {
+    __typename: "Ad",
+    id: string,
+    name: string,
+    description: string,
+    condition: string,
+    price?: string | null,
+    status?: string | null,
+    images?:  {
+      __typename: "ModelImageConnection",
+      items:  Array< {
+        __typename: "Image",
+        id: string,
+        adID: string,
+        url: string,
+        sort: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imageCount?: number | null,
+    paidImages?: boolean | null,
+    userID: string,
+    expiration: string,
+    autoRelist?: boolean | null,
+    scheduledRelist: number,
+    sold?: boolean | null,
+    categoryID: string,
+    compCategory?:  {
+      __typename: "CompCategory",
+      id: string,
+      name: string,
+      parent?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateImageMutationVariables = {
+  input: CreateImageInput,
+  condition?: ModelImageConditionInput | null,
+};
+
+export type CreateImageMutation = {
+  createImage?:  {
+    __typename: "Image",
+    id: string,
+    adID: string,
+    url: string,
+    sort: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateImageMutationVariables = {
+  input: UpdateImageInput,
+  condition?: ModelImageConditionInput | null,
+};
+
+export type UpdateImageMutation = {
+  updateImage?:  {
+    __typename: "Image",
+    id: string,
+    adID: string,
+    url: string,
+    sort: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteImageMutationVariables = {
+  input: DeleteImageInput,
+  condition?: ModelImageConditionInput | null,
+};
+
+export type DeleteImageMutation = {
+  deleteImage?:  {
+    __typename: "Image",
+    id: string,
+    adID: string,
+    url: string,
+    sort: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type SearchAdsQueryVariables = {
+  filter?: SearchableAdFilterInput | null,
+  sort?: Array< SearchableAdSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableAdAggregationInput | null > | null,
+};
+
+export type SearchAdsQuery = {
+  searchAds?:  {
+    __typename: "SearchableAdConnection",
+    items:  Array< {
+      __typename: "Ad",
+      id: string,
+      name: string,
+      description: string,
+      condition: string,
+      price?: string | null,
+      status?: string | null,
+      images?:  {
+        __typename: "ModelImageConnection",
+        nextToken?: string | null,
+      } | null,
+      imageCount?: number | null,
+      paidImages?: boolean | null,
+      userID: string,
+      expiration: string,
+      autoRelist?: boolean | null,
+      scheduledRelist: number,
+      sold?: boolean | null,
+      categoryID: string,
+      compCategory?:  {
+        __typename: "CompCategory",
+        id: string,
+        name: string,
+        parent?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type GetCompCategoryQueryVariables = {
+  id: string,
+};
+
+export type GetCompCategoryQuery = {
+  getCompCategory?:  {
+    __typename: "CompCategory",
+    id: string,
+    name: string,
+    parent?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCompCategoriesQueryVariables = {
+  id?: string | null,
+  filter?: ModelCompCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListCompCategoriesQuery = {
+  listCompCategories?:  {
+    __typename: "ModelCompCategoryConnection",
+    items:  Array< {
+      __typename: "CompCategory",
+      id: string,
+      name: string,
+      parent?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetAdQueryVariables = {
+  id: string,
+};
+
+export type GetAdQuery = {
+  getAd?:  {
+    __typename: "Ad",
+    id: string,
+    name: string,
+    description: string,
+    condition: string,
+    price?: string | null,
+    status?: string | null,
+    images?:  {
+      __typename: "ModelImageConnection",
+      items:  Array< {
+        __typename: "Image",
+        id: string,
+        adID: string,
+        url: string,
+        sort: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imageCount?: number | null,
+    paidImages?: boolean | null,
+    userID: string,
+    expiration: string,
+    autoRelist?: boolean | null,
+    scheduledRelist: number,
+    sold?: boolean | null,
+    categoryID: string,
+    compCategory?:  {
+      __typename: "CompCategory",
+      id: string,
+      name: string,
+      parent?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListAdsQueryVariables = {
+  filter?: ModelAdFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAdsQuery = {
+  listAds?:  {
+    __typename: "ModelAdConnection",
+    items:  Array< {
+      __typename: "Ad",
+      id: string,
+      name: string,
+      description: string,
+      condition: string,
+      price?: string | null,
+      status?: string | null,
+      images?:  {
+        __typename: "ModelImageConnection",
+        nextToken?: string | null,
+      } | null,
+      imageCount?: number | null,
+      paidImages?: boolean | null,
+      userID: string,
+      expiration: string,
+      autoRelist?: boolean | null,
+      scheduledRelist: number,
+      sold?: boolean | null,
+      categoryID: string,
+      compCategory?:  {
+        __typename: "CompCategory",
+        id: string,
+        name: string,
+        parent?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetImageQueryVariables = {
+  id: string,
+};
+
+export type GetImageQuery = {
+  getImage?:  {
+    __typename: "Image",
+    id: string,
+    adID: string,
+    url: string,
+    sort: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListImagesQueryVariables = {
+  filter?: ModelImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListImagesQuery = {
+  listImages?:  {
+    __typename: "ModelImageConnection",
+    items:  Array< {
+      __typename: "Image",
+      id: string,
+      adID: string,
+      url: string,
+      sort: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type CategoriesByParentQueryVariables = {
-  parent: string;
-  name?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelCategoryFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  parent: string,
+  name?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCompCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type CategoriesByParentQuery = {
-  categoriesByParent?: {
-    __typename: 'ModelCategoryConnection';
-    items: Array<{
-      __typename: 'Category';
-      name: string;
-      parent?: string | null;
-      nodeID: number;
-      path: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  categoriesByParent?:  {
+    __typename: "ModelCompCategoryConnection",
+    items:  Array< {
+      __typename: "CompCategory",
+      id: string,
+      name: string,
+      parent?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
-export type CategoriesByNodeQueryVariables = {
-  nodeID: number;
-  name?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelCategoryFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+export type ImagesByAdIDQueryVariables = {
+  adID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type CategoriesByNodeQuery = {
-  categoriesByNode?: {
-    __typename: 'ModelCategoryConnection';
-    items: Array<{
-      __typename: 'Category';
-      name: string;
-      parent?: string | null;
-      nodeID: number;
-      path: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+export type ImagesByAdIDQuery = {
+  imagesByAdID?:  {
+    __typename: "ModelImageConnection",
+    items:  Array< {
+      __typename: "Image",
+      id: string,
+      adID: string,
+      url: string,
+      sort: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };

@@ -1,22 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-bisman4sale-dev-141256-authRole",
-      "UnauthRoleArn": "arn:aws:iam::322304299495:role/amplify-bisman4sale-dev-141256-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::322304299495:role/amplify-bisman4sale-dev-141256-authRole",
+      "AuthRoleName": "amplify-bismanforsale-dev-170748-authRole",
+      "UnauthRoleArn": "arn:aws:iam::322304299495:role/amplify-bismanforsale-dev-170748-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::322304299495:role/amplify-bismanforsale-dev-170748-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-bisman4sale-dev-141256-deployment",
-      "UnauthRoleName": "amplify-bisman4sale-dev-141256-unauthRole",
-      "StackName": "amplify-bisman4sale-dev-141256",
-      "StackId": "arn:aws:cloudformation:us-east-1:322304299495:stack/amplify-bisman4sale-dev-141256/ad8d5430-8ec7-11ed-a678-0e3b6e6bdeb1",
-      "AmplifyAppId": "d1no89r0298kbk"
+      "DeploymentBucketName": "amplify-bismanforsale-dev-170748-deployment",
+      "UnauthRoleName": "amplify-bismanforsale-dev-170748-unauthRole",
+      "StackName": "amplify-bismanforsale-dev-170748",
+      "StackId": "arn:aws:cloudformation:us-east-1:322304299495:stack/amplify-bismanforsale-dev-170748/8d1ee500-bbaa-11ed-a427-0e1aa1817959",
+      "AmplifyAppId": "d2fycgfox4ue9o"
     },
     "categories": {
-      "auth": {
-        "bisman4sale8354c318": {}
-      },
       "api": {
-        "bisman4sale": {}
+        "bismanforsale": {}
       }
     }
   }

@@ -1,0 +1,40 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+
+# FOR TESTING ONLY!
+
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
+
+type CompCategory @model(subscriptions: null) {
+  id: ID! @primaryKey
+  name: String!
+  parent: String @index(name: "byParent", queryField: "categoriesByParent", sortKeyFields: ["name"])
+}
+
+type Ad @searchable @model(subscriptions: null) {
+  id: ID!
+  name: String!
+  description: String!
+  condition: String!
+  price: String
+  status: String
+  images: [Image] @hasMany(indexName: "byAd", fields: ["id"])
+  imageCount: Int
+  paidImages: Boolean
+  userID: String!
+  expiration: AWSDateTime!
+  autoRelist: Boolean
+  scheduledRelist: Int!
+  sold: Boolean
+  categoryID: ID!
+  compCategory: CompCategory @hasOne(fields: ["categoryID"])
+}
+
+type Image @model(subscriptions: null) {
+  id: ID!
+  adID: ID! @index(name: "byAd")
+  url: String!
+  sort: Int!
+}

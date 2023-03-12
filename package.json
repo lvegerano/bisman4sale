@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/datastore": "^4.1.0",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
     "@tanstack/react-query": "^4.24.10",
@@ -17,6 +18,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.4",
+    "ulidx": "^0.5.0",
     "use-debounce": "^9.0.3"
   },
   "devDependencies": {

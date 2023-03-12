@@ -62,9 +62,11 @@ const Management = (props: Props) => {
     }
   };
 
+  const seedData = async (categories: { [key: string]: string[] }) => {};
+
   const SeedData = async (e: FormEvent) => {
     e.preventDefault();
-    await seedCategories(categories);
+    // await seedCategories(categories);
   };
 
   return (
