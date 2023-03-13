@@ -164,7 +164,15 @@ const Create = ({ categories }: CreateProps) => {
                 </div>
                 {/* PHOTOS */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Photos</label>
+                  <div className="flex justify-between items-end">
+                    <label className="text-sm font-medium text-gray-700">Photos</label>
+                    <button
+                      type="button"
+                      className=" ml- inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      Buy Image Pack
+                    </button>
+                  </div>
                   <ImageUploader />
                 </div>
               </div>

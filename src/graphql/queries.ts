@@ -32,20 +32,32 @@ export const searchAds = /* GraphQL */ `
         imageCount
         paidImages
         userID
+        user {
+          id
+          cognitoID
+          stripeCustomerID
+          firstName
+          lastName
+          gender
+          birthday
+          phone
+          address
+          State
+          City
+          Zip
+          pictureURL
+          createdAt
+          updatedAt
+        }
         expiration
         autoRelist
         scheduledRelist
         sold
         categoryID
-        compCategory {
-          id
-          name
-          parent
-          createdAt
-          updatedAt
-        }
+        imagePackID
         createdAt
         updatedAt
+        userAdsId
       }
       nextToken
       total
@@ -120,26 +132,45 @@ export const getAd = /* GraphQL */ `
           sort
           createdAt
           updatedAt
+          adImagesId
         }
         nextToken
       }
       imageCount
       paidImages
       userID
+      user {
+        id
+        cognitoID
+        stripeCustomerID
+        firstName
+        lastName
+        gender
+        birthday
+        phone
+        address
+        State
+        City
+        Zip
+        pictureURL
+        ads {
+          nextToken
+        }
+        imagePacks {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       expiration
       autoRelist
       scheduledRelist
       sold
       categoryID
-      compCategory {
-        id
-        name
-        parent
-        createdAt
-        updatedAt
-      }
+      imagePackID
       createdAt
       updatedAt
+      userAdsId
     }
   }
 `;
@@ -159,20 +190,32 @@ export const listAds = /* GraphQL */ `
         imageCount
         paidImages
         userID
+        user {
+          id
+          cognitoID
+          stripeCustomerID
+          firstName
+          lastName
+          gender
+          birthday
+          phone
+          address
+          State
+          City
+          Zip
+          pictureURL
+          createdAt
+          updatedAt
+        }
         expiration
         autoRelist
         scheduledRelist
         sold
         categoryID
-        compCategory {
-          id
-          name
-          parent
-          createdAt
-          updatedAt
-        }
+        imagePackID
         createdAt
         updatedAt
+        userAdsId
       }
       nextToken
     }
@@ -187,6 +230,7 @@ export const getImage = /* GraphQL */ `
       sort
       createdAt
       updatedAt
+      adImagesId
     }
   }
 `;
@@ -202,6 +246,133 @@ export const listImages = /* GraphQL */ `
         adID
         url
         sort
+        createdAt
+        updatedAt
+        adImagesId
+      }
+      nextToken
+    }
+  }
+`;
+export const getImagePack = /* GraphQL */ `
+  query GetImagePack($id: ID!) {
+    getImagePack(id: $id) {
+      invoiceID
+      used
+      userID
+      adID
+      createdAt
+      id
+      updatedAt
+      userImagePacksId
+    }
+  }
+`;
+export const listImagePacks = /* GraphQL */ `
+  query ListImagePacks(
+    $filter: ModelImagePackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listImagePacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        invoiceID
+        used
+        userID
+        adID
+        createdAt
+        id
+        updatedAt
+        userImagePacksId
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      cognitoID
+      stripeCustomerID
+      firstName
+      lastName
+      gender
+      birthday
+      phone
+      address
+      State
+      City
+      Zip
+      pictureURL
+      ads {
+        items {
+          id
+          name
+          description
+          condition
+          price
+          status
+          imageCount
+          paidImages
+          userID
+          expiration
+          autoRelist
+          scheduledRelist
+          sold
+          categoryID
+          imagePackID
+          createdAt
+          updatedAt
+          userAdsId
+        }
+        nextToken
+      }
+      imagePacks {
+        items {
+          invoiceID
+          used
+          userID
+          adID
+          createdAt
+          id
+          updatedAt
+          userImagePacksId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        cognitoID
+        stripeCustomerID
+        firstName
+        lastName
+        gender
+        birthday
+        phone
+        address
+        State
+        City
+        Zip
+        pictureURL
+        ads {
+          nextToken
+        }
+        imagePacks {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -230,33 +401,6 @@ export const categoriesByParent = /* GraphQL */ `
         id
         name
         parent
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const imagesByAdID = /* GraphQL */ `
-  query ImagesByAdID(
-    $adID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelImageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    imagesByAdID(
-      adID: $adID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        adID
-        url
-        sort
         createdAt
         updatedAt
       }

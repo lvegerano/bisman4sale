@@ -90,6 +90,9 @@ export type CreateAdInput = {
   scheduledRelist: number,
   sold?: boolean | null,
   categoryID: string,
+  imagePackID?: string | null,
+  createdAt?: string | null,
+  userAdsId?: string | null,
 };
 
 export type ModelAdConditionInput = {
@@ -100,15 +103,18 @@ export type ModelAdConditionInput = {
   status?: ModelStringInput | null,
   imageCount?: ModelIntInput | null,
   paidImages?: ModelBooleanInput | null,
-  userID?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
   expiration?: ModelStringInput | null,
   autoRelist?: ModelBooleanInput | null,
   scheduledRelist?: ModelIntInput | null,
   sold?: ModelBooleanInput | null,
   categoryID?: ModelIDInput | null,
+  imagePackID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelAdConditionInput | null > | null,
   or?: Array< ModelAdConditionInput | null > | null,
   not?: ModelAdConditionInput | null,
+  userAdsId?: ModelIDInput | null,
 };
 
 export type ModelIntInput = {
@@ -158,14 +164,16 @@ export type Ad = {
   imageCount?: number | null,
   paidImages?: boolean | null,
   userID: string,
+  user?: User | null,
   expiration: string,
   autoRelist?: boolean | null,
   scheduledRelist: number,
   sold?: boolean | null,
   categoryID: string,
-  compCategory?: CompCategory | null,
+  imagePackID?: string | null,
   createdAt: string,
   updatedAt: string,
+  userAdsId?: string | null,
 };
 
 export type ModelImageConnection = {
@@ -182,6 +190,52 @@ export type Image = {
   sort: number,
   createdAt: string,
   updatedAt: string,
+  adImagesId?: string | null,
+};
+
+export type User = {
+  __typename: "User",
+  id: string,
+  cognitoID: string,
+  stripeCustomerID?: string | null,
+  firstName?: string | null,
+  lastName?: string | null,
+  gender?: string | null,
+  birthday?: string | null,
+  phone?: string | null,
+  address?: string | null,
+  State?: string | null,
+  City?: string | null,
+  Zip?: string | null,
+  pictureURL?: string | null,
+  ads?: ModelAdConnection | null,
+  imagePacks?: ModelImagePackConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelAdConnection = {
+  __typename: "ModelAdConnection",
+  items:  Array<Ad | null >,
+  nextToken?: string | null,
+};
+
+export type ModelImagePackConnection = {
+  __typename: "ModelImagePackConnection",
+  items:  Array<ImagePack | null >,
+  nextToken?: string | null,
+};
+
+export type ImagePack = {
+  __typename: "ImagePack",
+  invoiceID?: string | null,
+  used?: boolean | null,
+  userID: string,
+  adID?: string | null,
+  createdAt: string,
+  id: string,
+  updatedAt: string,
+  userImagePacksId?: string | null,
 };
 
 export type UpdateAdInput = {
@@ -199,6 +253,9 @@ export type UpdateAdInput = {
   scheduledRelist?: number | null,
   sold?: boolean | null,
   categoryID?: string | null,
+  imagePackID?: string | null,
+  createdAt?: string | null,
+  userAdsId?: string | null,
 };
 
 export type DeleteAdInput = {
@@ -210,6 +267,7 @@ export type CreateImageInput = {
   adID: string,
   url: string,
   sort: number,
+  adImagesId?: string | null,
 };
 
 export type ModelImageConditionInput = {
@@ -219,6 +277,7 @@ export type ModelImageConditionInput = {
   and?: Array< ModelImageConditionInput | null > | null,
   or?: Array< ModelImageConditionInput | null > | null,
   not?: ModelImageConditionInput | null,
+  adImagesId?: ModelIDInput | null,
 };
 
 export type UpdateImageInput = {
@@ -226,9 +285,100 @@ export type UpdateImageInput = {
   adID?: string | null,
   url?: string | null,
   sort?: number | null,
+  adImagesId?: string | null,
 };
 
 export type DeleteImageInput = {
+  id: string,
+};
+
+export type CreateImagePackInput = {
+  invoiceID?: string | null,
+  used?: boolean | null,
+  userID: string,
+  adID?: string | null,
+  createdAt?: string | null,
+  id?: string | null,
+  userImagePacksId?: string | null,
+};
+
+export type ModelImagePackConditionInput = {
+  invoiceID?: ModelStringInput | null,
+  used?: ModelBooleanInput | null,
+  userID?: ModelIDInput | null,
+  adID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelImagePackConditionInput | null > | null,
+  or?: Array< ModelImagePackConditionInput | null > | null,
+  not?: ModelImagePackConditionInput | null,
+  userImagePacksId?: ModelIDInput | null,
+};
+
+export type UpdateImagePackInput = {
+  invoiceID?: string | null,
+  used?: boolean | null,
+  userID?: string | null,
+  adID?: string | null,
+  createdAt?: string | null,
+  id: string,
+  userImagePacksId?: string | null,
+};
+
+export type DeleteImagePackInput = {
+  id: string,
+};
+
+export type CreateUserInput = {
+  id?: string | null,
+  cognitoID: string,
+  stripeCustomerID?: string | null,
+  firstName?: string | null,
+  lastName?: string | null,
+  gender?: string | null,
+  birthday?: string | null,
+  phone?: string | null,
+  address?: string | null,
+  State?: string | null,
+  City?: string | null,
+  Zip?: string | null,
+  pictureURL?: string | null,
+};
+
+export type ModelUserConditionInput = {
+  cognitoID?: ModelStringInput | null,
+  stripeCustomerID?: ModelStringInput | null,
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  gender?: ModelStringInput | null,
+  birthday?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  address?: ModelStringInput | null,
+  State?: ModelStringInput | null,
+  City?: ModelStringInput | null,
+  Zip?: ModelStringInput | null,
+  pictureURL?: ModelStringInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserInput = {
+  id: string,
+  cognitoID?: string | null,
+  stripeCustomerID?: string | null,
+  firstName?: string | null,
+  lastName?: string | null,
+  gender?: string | null,
+  birthday?: string | null,
+  phone?: string | null,
+  address?: string | null,
+  State?: string | null,
+  City?: string | null,
+  Zip?: string | null,
+  pictureURL?: string | null,
+};
+
+export type DeleteUserInput = {
   id: string,
 };
 
@@ -241,14 +391,16 @@ export type SearchableAdFilterInput = {
   status?: SearchableStringFilterInput | null,
   imageCount?: SearchableIntFilterInput | null,
   paidImages?: SearchableBooleanFilterInput | null,
-  userID?: SearchableStringFilterInput | null,
+  userID?: SearchableIDFilterInput | null,
   expiration?: SearchableStringFilterInput | null,
   autoRelist?: SearchableBooleanFilterInput | null,
   scheduledRelist?: SearchableIntFilterInput | null,
   sold?: SearchableBooleanFilterInput | null,
   categoryID?: SearchableIDFilterInput | null,
+  imagePackID?: SearchableIDFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
+  userAdsId?: SearchableIDFilterInput | null,
   and?: Array< SearchableAdFilterInput | null > | null,
   or?: Array< SearchableAdFilterInput | null > | null,
   not?: SearchableAdFilterInput | null,
@@ -323,8 +475,10 @@ export enum SearchableAdSortableFields {
   scheduledRelist = "scheduledRelist",
   sold = "sold",
   categoryID = "categoryID",
+  imagePackID = "imagePackID",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
+  userAdsId = "userAdsId",
 }
 
 
@@ -364,8 +518,10 @@ export enum SearchableAdAggregateField {
   scheduledRelist = "scheduledRelist",
   sold = "sold",
   categoryID = "categoryID",
+  imagePackID = "imagePackID",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
+  userAdsId = "userAdsId",
 }
 
 
@@ -432,21 +588,18 @@ export type ModelAdFilterInput = {
   status?: ModelStringInput | null,
   imageCount?: ModelIntInput | null,
   paidImages?: ModelBooleanInput | null,
-  userID?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
   expiration?: ModelStringInput | null,
   autoRelist?: ModelBooleanInput | null,
   scheduledRelist?: ModelIntInput | null,
   sold?: ModelBooleanInput | null,
   categoryID?: ModelIDInput | null,
+  imagePackID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelAdFilterInput | null > | null,
   or?: Array< ModelAdFilterInput | null > | null,
   not?: ModelAdFilterInput | null,
-};
-
-export type ModelAdConnection = {
-  __typename: "ModelAdConnection",
-  items:  Array<Ad | null >,
-  nextToken?: string | null,
+  userAdsId?: ModelIDInput | null,
 };
 
 export type ModelImageFilterInput = {
@@ -457,6 +610,44 @@ export type ModelImageFilterInput = {
   and?: Array< ModelImageFilterInput | null > | null,
   or?: Array< ModelImageFilterInput | null > | null,
   not?: ModelImageFilterInput | null,
+  adImagesId?: ModelIDInput | null,
+};
+
+export type ModelImagePackFilterInput = {
+  invoiceID?: ModelStringInput | null,
+  used?: ModelBooleanInput | null,
+  userID?: ModelIDInput | null,
+  adID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelImagePackFilterInput | null > | null,
+  or?: Array< ModelImagePackFilterInput | null > | null,
+  not?: ModelImagePackFilterInput | null,
+  userImagePacksId?: ModelIDInput | null,
+};
+
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null,
+  cognitoID?: ModelStringInput | null,
+  stripeCustomerID?: ModelStringInput | null,
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  gender?: ModelStringInput | null,
+  birthday?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  address?: ModelStringInput | null,
+  State?: ModelStringInput | null,
+  City?: ModelStringInput | null,
+  Zip?: ModelStringInput | null,
+  pictureURL?: ModelStringInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
+};
+
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
+  nextToken?: string | null,
 };
 
 export type ModelStringKeyConditionInput = {
@@ -541,27 +732,48 @@ export type CreateAdMutation = {
         sort: number,
         createdAt: string,
         updatedAt: string,
+        adImagesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     imageCount?: number | null,
     paidImages?: boolean | null,
     userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      cognitoID: string,
+      stripeCustomerID?: string | null,
+      firstName?: string | null,
+      lastName?: string | null,
+      gender?: string | null,
+      birthday?: string | null,
+      phone?: string | null,
+      address?: string | null,
+      State?: string | null,
+      City?: string | null,
+      Zip?: string | null,
+      pictureURL?: string | null,
+      ads?:  {
+        __typename: "ModelAdConnection",
+        nextToken?: string | null,
+      } | null,
+      imagePacks?:  {
+        __typename: "ModelImagePackConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     expiration: string,
     autoRelist?: boolean | null,
     scheduledRelist: number,
     sold?: boolean | null,
     categoryID: string,
-    compCategory?:  {
-      __typename: "CompCategory",
-      id: string,
-      name: string,
-      parent?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    imagePackID?: string | null,
     createdAt: string,
     updatedAt: string,
+    userAdsId?: string | null,
   } | null,
 };
 
@@ -589,27 +801,48 @@ export type UpdateAdMutation = {
         sort: number,
         createdAt: string,
         updatedAt: string,
+        adImagesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     imageCount?: number | null,
     paidImages?: boolean | null,
     userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      cognitoID: string,
+      stripeCustomerID?: string | null,
+      firstName?: string | null,
+      lastName?: string | null,
+      gender?: string | null,
+      birthday?: string | null,
+      phone?: string | null,
+      address?: string | null,
+      State?: string | null,
+      City?: string | null,
+      Zip?: string | null,
+      pictureURL?: string | null,
+      ads?:  {
+        __typename: "ModelAdConnection",
+        nextToken?: string | null,
+      } | null,
+      imagePacks?:  {
+        __typename: "ModelImagePackConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     expiration: string,
     autoRelist?: boolean | null,
     scheduledRelist: number,
     sold?: boolean | null,
     categoryID: string,
-    compCategory?:  {
-      __typename: "CompCategory",
-      id: string,
-      name: string,
-      parent?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    imagePackID?: string | null,
     createdAt: string,
     updatedAt: string,
+    userAdsId?: string | null,
   } | null,
 };
 
@@ -637,27 +870,48 @@ export type DeleteAdMutation = {
         sort: number,
         createdAt: string,
         updatedAt: string,
+        adImagesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     imageCount?: number | null,
     paidImages?: boolean | null,
     userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      cognitoID: string,
+      stripeCustomerID?: string | null,
+      firstName?: string | null,
+      lastName?: string | null,
+      gender?: string | null,
+      birthday?: string | null,
+      phone?: string | null,
+      address?: string | null,
+      State?: string | null,
+      City?: string | null,
+      Zip?: string | null,
+      pictureURL?: string | null,
+      ads?:  {
+        __typename: "ModelAdConnection",
+        nextToken?: string | null,
+      } | null,
+      imagePacks?:  {
+        __typename: "ModelImagePackConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     expiration: string,
     autoRelist?: boolean | null,
     scheduledRelist: number,
     sold?: boolean | null,
     categoryID: string,
-    compCategory?:  {
-      __typename: "CompCategory",
-      id: string,
-      name: string,
-      parent?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    imagePackID?: string | null,
     createdAt: string,
     updatedAt: string,
+    userAdsId?: string | null,
   } | null,
 };
 
@@ -675,6 +929,7 @@ export type CreateImageMutation = {
     sort: number,
     createdAt: string,
     updatedAt: string,
+    adImagesId?: string | null,
   } | null,
 };
 
@@ -692,6 +947,7 @@ export type UpdateImageMutation = {
     sort: number,
     createdAt: string,
     updatedAt: string,
+    adImagesId?: string | null,
   } | null,
 };
 
@@ -707,6 +963,262 @@ export type DeleteImageMutation = {
     adID: string,
     url: string,
     sort: number,
+    createdAt: string,
+    updatedAt: string,
+    adImagesId?: string | null,
+  } | null,
+};
+
+export type CreateImagePackMutationVariables = {
+  input: CreateImagePackInput,
+  condition?: ModelImagePackConditionInput | null,
+};
+
+export type CreateImagePackMutation = {
+  createImagePack?:  {
+    __typename: "ImagePack",
+    invoiceID?: string | null,
+    used?: boolean | null,
+    userID: string,
+    adID?: string | null,
+    createdAt: string,
+    id: string,
+    updatedAt: string,
+    userImagePacksId?: string | null,
+  } | null,
+};
+
+export type UpdateImagePackMutationVariables = {
+  input: UpdateImagePackInput,
+  condition?: ModelImagePackConditionInput | null,
+};
+
+export type UpdateImagePackMutation = {
+  updateImagePack?:  {
+    __typename: "ImagePack",
+    invoiceID?: string | null,
+    used?: boolean | null,
+    userID: string,
+    adID?: string | null,
+    createdAt: string,
+    id: string,
+    updatedAt: string,
+    userImagePacksId?: string | null,
+  } | null,
+};
+
+export type DeleteImagePackMutationVariables = {
+  input: DeleteImagePackInput,
+  condition?: ModelImagePackConditionInput | null,
+};
+
+export type DeleteImagePackMutation = {
+  deleteImagePack?:  {
+    __typename: "ImagePack",
+    invoiceID?: string | null,
+    used?: boolean | null,
+    userID: string,
+    adID?: string | null,
+    createdAt: string,
+    id: string,
+    updatedAt: string,
+    userImagePacksId?: string | null,
+  } | null,
+};
+
+export type CreateUserMutationVariables = {
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    cognitoID: string,
+    stripeCustomerID?: string | null,
+    firstName?: string | null,
+    lastName?: string | null,
+    gender?: string | null,
+    birthday?: string | null,
+    phone?: string | null,
+    address?: string | null,
+    State?: string | null,
+    City?: string | null,
+    Zip?: string | null,
+    pictureURL?: string | null,
+    ads?:  {
+      __typename: "ModelAdConnection",
+      items:  Array< {
+        __typename: "Ad",
+        id: string,
+        name: string,
+        description: string,
+        condition: string,
+        price?: string | null,
+        status?: string | null,
+        imageCount?: number | null,
+        paidImages?: boolean | null,
+        userID: string,
+        expiration: string,
+        autoRelist?: boolean | null,
+        scheduledRelist: number,
+        sold?: boolean | null,
+        categoryID: string,
+        imagePackID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userAdsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imagePacks?:  {
+      __typename: "ModelImagePackConnection",
+      items:  Array< {
+        __typename: "ImagePack",
+        invoiceID?: string | null,
+        used?: boolean | null,
+        userID: string,
+        adID?: string | null,
+        createdAt: string,
+        id: string,
+        updatedAt: string,
+        userImagePacksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    cognitoID: string,
+    stripeCustomerID?: string | null,
+    firstName?: string | null,
+    lastName?: string | null,
+    gender?: string | null,
+    birthday?: string | null,
+    phone?: string | null,
+    address?: string | null,
+    State?: string | null,
+    City?: string | null,
+    Zip?: string | null,
+    pictureURL?: string | null,
+    ads?:  {
+      __typename: "ModelAdConnection",
+      items:  Array< {
+        __typename: "Ad",
+        id: string,
+        name: string,
+        description: string,
+        condition: string,
+        price?: string | null,
+        status?: string | null,
+        imageCount?: number | null,
+        paidImages?: boolean | null,
+        userID: string,
+        expiration: string,
+        autoRelist?: boolean | null,
+        scheduledRelist: number,
+        sold?: boolean | null,
+        categoryID: string,
+        imagePackID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userAdsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imagePacks?:  {
+      __typename: "ModelImagePackConnection",
+      items:  Array< {
+        __typename: "ImagePack",
+        invoiceID?: string | null,
+        used?: boolean | null,
+        userID: string,
+        adID?: string | null,
+        createdAt: string,
+        id: string,
+        updatedAt: string,
+        userImagePacksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    cognitoID: string,
+    stripeCustomerID?: string | null,
+    firstName?: string | null,
+    lastName?: string | null,
+    gender?: string | null,
+    birthday?: string | null,
+    phone?: string | null,
+    address?: string | null,
+    State?: string | null,
+    City?: string | null,
+    Zip?: string | null,
+    pictureURL?: string | null,
+    ads?:  {
+      __typename: "ModelAdConnection",
+      items:  Array< {
+        __typename: "Ad",
+        id: string,
+        name: string,
+        description: string,
+        condition: string,
+        price?: string | null,
+        status?: string | null,
+        imageCount?: number | null,
+        paidImages?: boolean | null,
+        userID: string,
+        expiration: string,
+        autoRelist?: boolean | null,
+        scheduledRelist: number,
+        sold?: boolean | null,
+        categoryID: string,
+        imagePackID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userAdsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imagePacks?:  {
+      __typename: "ModelImagePackConnection",
+      items:  Array< {
+        __typename: "ImagePack",
+        invoiceID?: string | null,
+        used?: boolean | null,
+        userID: string,
+        adID?: string | null,
+        createdAt: string,
+        id: string,
+        updatedAt: string,
+        userImagePacksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -739,21 +1251,33 @@ export type SearchAdsQuery = {
       imageCount?: number | null,
       paidImages?: boolean | null,
       userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        cognitoID: string,
+        stripeCustomerID?: string | null,
+        firstName?: string | null,
+        lastName?: string | null,
+        gender?: string | null,
+        birthday?: string | null,
+        phone?: string | null,
+        address?: string | null,
+        State?: string | null,
+        City?: string | null,
+        Zip?: string | null,
+        pictureURL?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       expiration: string,
       autoRelist?: boolean | null,
       scheduledRelist: number,
       sold?: boolean | null,
       categoryID: string,
-      compCategory?:  {
-        __typename: "CompCategory",
-        id: string,
-        name: string,
-        parent?: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      imagePackID?: string | null,
       createdAt: string,
       updatedAt: string,
+      userAdsId?: string | null,
     } | null >,
     nextToken?: string | null,
     total?: number | null,
@@ -837,27 +1361,48 @@ export type GetAdQuery = {
         sort: number,
         createdAt: string,
         updatedAt: string,
+        adImagesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     imageCount?: number | null,
     paidImages?: boolean | null,
     userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      cognitoID: string,
+      stripeCustomerID?: string | null,
+      firstName?: string | null,
+      lastName?: string | null,
+      gender?: string | null,
+      birthday?: string | null,
+      phone?: string | null,
+      address?: string | null,
+      State?: string | null,
+      City?: string | null,
+      Zip?: string | null,
+      pictureURL?: string | null,
+      ads?:  {
+        __typename: "ModelAdConnection",
+        nextToken?: string | null,
+      } | null,
+      imagePacks?:  {
+        __typename: "ModelImagePackConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     expiration: string,
     autoRelist?: boolean | null,
     scheduledRelist: number,
     sold?: boolean | null,
     categoryID: string,
-    compCategory?:  {
-      __typename: "CompCategory",
-      id: string,
-      name: string,
-      parent?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    imagePackID?: string | null,
     createdAt: string,
     updatedAt: string,
+    userAdsId?: string | null,
   } | null,
 };
 
@@ -885,21 +1430,33 @@ export type ListAdsQuery = {
       imageCount?: number | null,
       paidImages?: boolean | null,
       userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        cognitoID: string,
+        stripeCustomerID?: string | null,
+        firstName?: string | null,
+        lastName?: string | null,
+        gender?: string | null,
+        birthday?: string | null,
+        phone?: string | null,
+        address?: string | null,
+        State?: string | null,
+        City?: string | null,
+        Zip?: string | null,
+        pictureURL?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       expiration: string,
       autoRelist?: boolean | null,
       scheduledRelist: number,
       sold?: boolean | null,
       categoryID: string,
-      compCategory?:  {
-        __typename: "CompCategory",
-        id: string,
-        name: string,
-        parent?: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      imagePackID?: string | null,
       createdAt: string,
       updatedAt: string,
+      userAdsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -918,6 +1475,7 @@ export type GetImageQuery = {
     sort: number,
     createdAt: string,
     updatedAt: string,
+    adImagesId?: string | null,
   } | null,
 };
 
@@ -936,6 +1494,153 @@ export type ListImagesQuery = {
       adID: string,
       url: string,
       sort: number,
+      createdAt: string,
+      updatedAt: string,
+      adImagesId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetImagePackQueryVariables = {
+  id: string,
+};
+
+export type GetImagePackQuery = {
+  getImagePack?:  {
+    __typename: "ImagePack",
+    invoiceID?: string | null,
+    used?: boolean | null,
+    userID: string,
+    adID?: string | null,
+    createdAt: string,
+    id: string,
+    updatedAt: string,
+    userImagePacksId?: string | null,
+  } | null,
+};
+
+export type ListImagePacksQueryVariables = {
+  filter?: ModelImagePackFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListImagePacksQuery = {
+  listImagePacks?:  {
+    __typename: "ModelImagePackConnection",
+    items:  Array< {
+      __typename: "ImagePack",
+      invoiceID?: string | null,
+      used?: boolean | null,
+      userID: string,
+      adID?: string | null,
+      createdAt: string,
+      id: string,
+      updatedAt: string,
+      userImagePacksId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserQueryVariables = {
+  id: string,
+};
+
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    cognitoID: string,
+    stripeCustomerID?: string | null,
+    firstName?: string | null,
+    lastName?: string | null,
+    gender?: string | null,
+    birthday?: string | null,
+    phone?: string | null,
+    address?: string | null,
+    State?: string | null,
+    City?: string | null,
+    Zip?: string | null,
+    pictureURL?: string | null,
+    ads?:  {
+      __typename: "ModelAdConnection",
+      items:  Array< {
+        __typename: "Ad",
+        id: string,
+        name: string,
+        description: string,
+        condition: string,
+        price?: string | null,
+        status?: string | null,
+        imageCount?: number | null,
+        paidImages?: boolean | null,
+        userID: string,
+        expiration: string,
+        autoRelist?: boolean | null,
+        scheduledRelist: number,
+        sold?: boolean | null,
+        categoryID: string,
+        imagePackID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userAdsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    imagePacks?:  {
+      __typename: "ModelImagePackConnection",
+      items:  Array< {
+        __typename: "ImagePack",
+        invoiceID?: string | null,
+        used?: boolean | null,
+        userID: string,
+        adID?: string | null,
+        createdAt: string,
+        id: string,
+        updatedAt: string,
+        userImagePacksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      cognitoID: string,
+      stripeCustomerID?: string | null,
+      firstName?: string | null,
+      lastName?: string | null,
+      gender?: string | null,
+      birthday?: string | null,
+      phone?: string | null,
+      address?: string | null,
+      State?: string | null,
+      City?: string | null,
+      Zip?: string | null,
+      pictureURL?: string | null,
+      ads?:  {
+        __typename: "ModelAdConnection",
+        nextToken?: string | null,
+      } | null,
+      imagePacks?:  {
+        __typename: "ModelImagePackConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -960,30 +1665,6 @@ export type CategoriesByParentQuery = {
       id: string,
       name: string,
       parent?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ImagesByAdIDQueryVariables = {
-  adID: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelImageFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ImagesByAdIDQuery = {
-  imagesByAdID?:  {
-    __typename: "ModelImageConnection",
-    items:  Array< {
-      __typename: "Image",
-      id: string,
-      adID: string,
-      url: string,
-      sort: number,
       createdAt: string,
       updatedAt: string,
     } | null >,

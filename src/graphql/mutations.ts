@@ -61,26 +61,45 @@ export const createAd = /* GraphQL */ `
           sort
           createdAt
           updatedAt
+          adImagesId
         }
         nextToken
       }
       imageCount
       paidImages
       userID
+      user {
+        id
+        cognitoID
+        stripeCustomerID
+        firstName
+        lastName
+        gender
+        birthday
+        phone
+        address
+        State
+        City
+        Zip
+        pictureURL
+        ads {
+          nextToken
+        }
+        imagePacks {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       expiration
       autoRelist
       scheduledRelist
       sold
       categoryID
-      compCategory {
-        id
-        name
-        parent
-        createdAt
-        updatedAt
-      }
+      imagePackID
       createdAt
       updatedAt
+      userAdsId
     }
   }
 `;
@@ -101,26 +120,45 @@ export const updateAd = /* GraphQL */ `
           sort
           createdAt
           updatedAt
+          adImagesId
         }
         nextToken
       }
       imageCount
       paidImages
       userID
+      user {
+        id
+        cognitoID
+        stripeCustomerID
+        firstName
+        lastName
+        gender
+        birthday
+        phone
+        address
+        State
+        City
+        Zip
+        pictureURL
+        ads {
+          nextToken
+        }
+        imagePacks {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       expiration
       autoRelist
       scheduledRelist
       sold
       categoryID
-      compCategory {
-        id
-        name
-        parent
-        createdAt
-        updatedAt
-      }
+      imagePackID
       createdAt
       updatedAt
+      userAdsId
     }
   }
 `;
@@ -141,26 +179,45 @@ export const deleteAd = /* GraphQL */ `
           sort
           createdAt
           updatedAt
+          adImagesId
         }
         nextToken
       }
       imageCount
       paidImages
       userID
+      user {
+        id
+        cognitoID
+        stripeCustomerID
+        firstName
+        lastName
+        gender
+        birthday
+        phone
+        address
+        State
+        City
+        Zip
+        pictureURL
+        ads {
+          nextToken
+        }
+        imagePacks {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       expiration
       autoRelist
       scheduledRelist
       sold
       categoryID
-      compCategory {
-        id
-        name
-        parent
-        createdAt
-        updatedAt
-      }
+      imagePackID
       createdAt
       updatedAt
+      userAdsId
     }
   }
 `;
@@ -176,6 +233,7 @@ export const createImage = /* GraphQL */ `
       sort
       createdAt
       updatedAt
+      adImagesId
     }
   }
 `;
@@ -191,6 +249,7 @@ export const updateImage = /* GraphQL */ `
       sort
       createdAt
       updatedAt
+      adImagesId
     }
   }
 `;
@@ -204,6 +263,238 @@ export const deleteImage = /* GraphQL */ `
       adID
       url
       sort
+      createdAt
+      updatedAt
+      adImagesId
+    }
+  }
+`;
+export const createImagePack = /* GraphQL */ `
+  mutation CreateImagePack(
+    $input: CreateImagePackInput!
+    $condition: ModelImagePackConditionInput
+  ) {
+    createImagePack(input: $input, condition: $condition) {
+      invoiceID
+      used
+      userID
+      adID
+      createdAt
+      id
+      updatedAt
+      userImagePacksId
+    }
+  }
+`;
+export const updateImagePack = /* GraphQL */ `
+  mutation UpdateImagePack(
+    $input: UpdateImagePackInput!
+    $condition: ModelImagePackConditionInput
+  ) {
+    updateImagePack(input: $input, condition: $condition) {
+      invoiceID
+      used
+      userID
+      adID
+      createdAt
+      id
+      updatedAt
+      userImagePacksId
+    }
+  }
+`;
+export const deleteImagePack = /* GraphQL */ `
+  mutation DeleteImagePack(
+    $input: DeleteImagePackInput!
+    $condition: ModelImagePackConditionInput
+  ) {
+    deleteImagePack(input: $input, condition: $condition) {
+      invoiceID
+      used
+      userID
+      adID
+      createdAt
+      id
+      updatedAt
+      userImagePacksId
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      cognitoID
+      stripeCustomerID
+      firstName
+      lastName
+      gender
+      birthday
+      phone
+      address
+      State
+      City
+      Zip
+      pictureURL
+      ads {
+        items {
+          id
+          name
+          description
+          condition
+          price
+          status
+          imageCount
+          paidImages
+          userID
+          expiration
+          autoRelist
+          scheduledRelist
+          sold
+          categoryID
+          imagePackID
+          createdAt
+          updatedAt
+          userAdsId
+        }
+        nextToken
+      }
+      imagePacks {
+        items {
+          invoiceID
+          used
+          userID
+          adID
+          createdAt
+          id
+          updatedAt
+          userImagePacksId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      cognitoID
+      stripeCustomerID
+      firstName
+      lastName
+      gender
+      birthday
+      phone
+      address
+      State
+      City
+      Zip
+      pictureURL
+      ads {
+        items {
+          id
+          name
+          description
+          condition
+          price
+          status
+          imageCount
+          paidImages
+          userID
+          expiration
+          autoRelist
+          scheduledRelist
+          sold
+          categoryID
+          imagePackID
+          createdAt
+          updatedAt
+          userAdsId
+        }
+        nextToken
+      }
+      imagePacks {
+        items {
+          invoiceID
+          used
+          userID
+          adID
+          createdAt
+          id
+          updatedAt
+          userImagePacksId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      cognitoID
+      stripeCustomerID
+      firstName
+      lastName
+      gender
+      birthday
+      phone
+      address
+      State
+      City
+      Zip
+      pictureURL
+      ads {
+        items {
+          id
+          name
+          description
+          condition
+          price
+          status
+          imageCount
+          paidImages
+          userID
+          expiration
+          autoRelist
+          scheduledRelist
+          sold
+          categoryID
+          imagePackID
+          createdAt
+          updatedAt
+          userAdsId
+        }
+        nextToken
+      }
+      imagePacks {
+        items {
+          invoiceID
+          used
+          userID
+          adID
+          createdAt
+          id
+          updatedAt
+          userImagePacksId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }

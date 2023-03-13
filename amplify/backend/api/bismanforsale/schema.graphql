@@ -20,21 +20,49 @@ type Ad @searchable @model(subscriptions: null) {
   condition: String!
   price: String
   status: String
-  images: [Image] @hasMany(indexName: "byAd", fields: ["id"])
+  images: [Image] @hasMany
   imageCount: Int
   paidImages: Boolean
-  userID: String!
+  userID: ID!
+  user: User @hasOne(fields: ["userID"])
   expiration: AWSDateTime!
   autoRelist: Boolean
   scheduledRelist: Int!
   sold: Boolean
   categoryID: ID!
-  compCategory: CompCategory @hasOne(fields: ["categoryID"])
+  imagePackID: ID
+  createdAt: AWSDateTime!
 }
 
 type Image @model(subscriptions: null) {
   id: ID!
-  adID: ID! @index(name: "byAd")
+  adID: ID!
   url: String!
   sort: Int!
+}
+
+type ImagePack @model(subscriptions: null) {
+  invoiceID: String
+  used: Boolean
+  userID: ID!
+  adID: ID
+  createdAt: AWSDateTime!
+}
+
+type User @model(subscriptions: null) {
+  id: ID!
+  cognitoID: String!
+  stripeCustomerID: String
+  firstName: String
+  lastName: String
+  gender: String
+  birthday: String
+  phone: String
+  address: String
+  State: String
+  City: String
+  Zip: String
+  pictureURL: String
+  ads: [Ad] @hasMany
+  imagePacks: [ImagePack] @hasMany
 }
